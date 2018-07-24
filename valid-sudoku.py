@@ -4,7 +4,7 @@
 
 class Solution(object):
     def isValidSudoku(self, board):
-        cols = []
+        cols = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
         for i in range(9):
             row = {}
             for j in range(9):
@@ -14,14 +14,10 @@ class Solution(object):
                         return False
                     row[e] = j
 
-                if len(cols) > j:
                     col = cols[j]
-                    if e != '.':
-                        if e in col:
-                            return False
-                        col[e] = i
-                else:
-                    cols.append({e: i} if e != '.' else {})
+                    if e in col:
+                        return False
+                    col[e] = i
 
                 c1, c2, c3 = None, None, None
                 if i in [2, 5, 8] and j in [2, 5, 8]:
@@ -31,7 +27,6 @@ class Solution(object):
                 if c1 is None:
                     continue
                 if len(c1) + len(c2) + len(c3) != len(set(c1 + c2 + c3)):
-                    print '35'
                     return False
 
         return True
