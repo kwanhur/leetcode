@@ -3,6 +3,15 @@
 
 
 class Solution(object):
+    def rotate2(self, matrix):
+        """
+        rotate rows r0<->r(n-1)
+        zip combine first element at rows
+        map-list convert to list and return list
+        list[:] means start = 0, end = n, step = 1, then every element will update by map result
+        """
+        matrix[:] = map(list, zip(*matrix[::-1]))
+
     def rotate(self, matrix):
         n = len(matrix)
         if not n:
